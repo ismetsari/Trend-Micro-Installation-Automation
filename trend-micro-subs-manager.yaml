@@ -10,13 +10,13 @@
 
     - name: Register to subscription manager if not already registered (Red Hat Enterprise Linux 8)
       shell: |
-        subscription-manager register --org="TT_Mobil" --activationkey="TEST_Redhat_8"
+        <Your_Red_Hat_7.x_Subscription_Manager_Activation-Key_Comes_Here>
         subscription-manager release --set=8.6
       when: ansible_distribution_major_version == '8'
       ignore_errors: true
 
     - name: Register to subscription manager if not already registered (Red Hat Enterprise Linux 7)
-      shell: subscription-manager register --org="TT_Mobil" --activationkey="TEST_Redhat_7"
+      shell: <Your_Red_Hat_8.x_Subscription_Manager_Activation-Key_Comes_Here>
       when: ansible_distribution_major_version == '7'
       ignore_errors: true
 
@@ -32,14 +32,14 @@
         
     - name: Copying rpm file to the destination node
       copy:
-        src: /ansible/automation/repository/rpms/trendmicro.sh
+        src: <path-of-your-shell-script-comes-here>
         dest: /tmp/agents
         mode: '0777'
 
     - name: Installation
       shell: |
         cd /tmp/agents
-        ./trendmicro.sh
+        <Execute shell script e.g -> ./trendmicro.sh>
       register: trend_micro_installation_status
 
     - name: Installation details
